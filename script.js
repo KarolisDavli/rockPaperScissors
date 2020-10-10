@@ -15,7 +15,7 @@ function playerPlay() {
 // Computer randomly picks an option
 function computerPlay() {
   let game = ["Rock", "Paper", "Scissors"];
-  let i = Math.floor(Math.random() * 2);
+  let i = Math.floor(Math.random() * 3);
   let computerChoice = game[i];
   return computerChoice;
 }
@@ -43,13 +43,13 @@ function playRound(playerSelection, computerSelection) {
 }
 
 function game() {
+  // Looping game 5 times
   for (i = 0; i < 5; i++) {
+    // Init selection for computer and player
     computerSelection = computerPlay();
     playerSelection = playerPlay();
-    playRound(playerSelection, computerSelection);
 
-    console.log("Player selection", playerSelection);
-    console.log("Computer selection", computerSelection);
+    // Runing game play function and logging results
     console.log(playRound(playerSelection, computerSelection));
   }
 }
