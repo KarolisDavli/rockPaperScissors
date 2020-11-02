@@ -4,7 +4,7 @@ let playerSelection;
 let playerCounter = 0;
 let computerCounter = 0;
 
-// Dom selectors
+// DOM selectors
 const title = document.querySelector('h1');
 const playerScore = document.querySelector('.player').firstElementChild;
 const computerScore = document.querySelector('.computer').firstElementChild;
@@ -31,14 +31,19 @@ buttons.forEach((button) => {
 buttons.forEach((button) => {
   button.addEventListener('click', () => {
     button.classList.add('clicked');
-    removeTransition(button);
   })
 })
 
-// Remove animation - propertyName not found
+buttons.forEach((button) => {
+  button.addEventListener('transitionend', removeTransition);
+  console.log(button);
+})
+
+// Remove animation
 function removeTransition(e) {
   if (e.propertyName !== 'transform') return; //Skip if not transform
   this.classList.remove('clicked')
+  console.log(e.propertyName);
 }
 
 
@@ -49,9 +54,17 @@ function doSomething() {
 
   if (playerCounter === 5) {
     title.textContent = 'Player Wins'
+    playerCounter = 0;
+    computerCounter = 0;
+    playerScore.textContent = playerCounter;
+    computerScore.textContent = playerCounter;
     return;
   } else if (computerCounter === 5) {
-    title.textContent = 'Computer Wins'
+    title.textContent = 'Computer Wins';
+    playerCounter = 0;
+    computerCounter = 0;
+    playerScore.textContent = playerCounter;
+    computerScore.textContent = playerCounter;
     return;
   }
 }
@@ -69,7 +82,6 @@ function computerPlay() {
 function playRound(playerSelection, computerSelection) {
   // Start with checking if its a tie
   if (computerSelection === playerSelection) {
-    console.log("Tie");
     title.textContent = 'It\'s a tie!'
     // Check if player wins
   } else if (
