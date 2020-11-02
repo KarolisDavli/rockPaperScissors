@@ -1,16 +1,61 @@
 // Global variables
 let computerSelection;
 let playerSelection;
+let playerCounter = 0;
+let computerCounter = 0;
+
+// Dom selectors
+const title = document.querySelector('h1');
+const playerScore = document.querySelector('.player').firstElementChild;
+const computerScore = document.querySelector('.computer').firstElementChild;
+
 
 // Player picks an option
-function playerPlay() {
-  let playerInput = prompt("Enter you selection: 'rock - paper - scissors' ");
-  // Format players input
-  let playerChoice =
-    playerInput.charAt(0).toUpperCase() +
-    playerInput.substring(1, playerInput.length).toLowerCase();
-  return playerChoice;
+// function playerPlay() {
+//   let playerInput = prompt("Enter you selection: 'rock - paper - scissors' ");
+//   // Format players input
+//   let playerChoice =
+//     playerInput.charAt(0).toUpperCase() +
+//     playerInput.substring(1, playerInput.length).toLowerCase();
+//   return playerChoice;
+// }
+
+
+// New Shit
+const buttons = document.querySelectorAll('.player-selection');
+buttons.forEach((button) => {
+  button.addEventListener('click', doSomething);
+})
+
+// Buttons animations
+buttons.forEach((button) => {
+  button.addEventListener('click', () => {
+    button.classList.add('clicked');
+    removeTransition(button);
+  })
+})
+
+// Remove animation - propertyName not found
+function removeTransition(e) {
+  if (e.propertyName !== 'transform') return; //Skip if not transform
+  this.classList.remove('clicked')
 }
+
+
+function doSomething() {
+  let playerSelection = this.innerHTML;
+  let computerSelection = computerPlay();
+  playRound(playerSelection, computerSelection);
+
+  if (playerCounter === 5) {
+    title.textContent = 'Player Wins'
+    return;
+  } else if (computerCounter === 5) {
+    title.textContent = 'Computer Wins'
+    return;
+  }
+}
+// New Shit End
 
 // Computer randomly picks an option
 function computerPlay() {
@@ -24,34 +69,35 @@ function computerPlay() {
 function playRound(playerSelection, computerSelection) {
   // Start with checking if its a tie
   if (computerSelection === playerSelection) {
-    return "Tie";
+    console.log("Tie");
+    title.textContent = 'It\'s a tie!'
     // Check if player wins
   } else if (
     (computerSelection == "Rock" && playerSelection == "Paper") ||
     (computerSelection == "Scissors" && playerSelection == "Rock") ||
     (computerSelection == "Paper" && playerSelection == "Scissors")
   ) {
-    console.log(`${playerSelection} beats ${computerSelection}, Player Wins!`);
-    return "You Win!";
+    playerCounter++;
+    playerScore.textContent = playerCounter;
+    title.textContent = (`${playerSelection} beats ${computerSelection}, Player Wins!`);
     // Check if computer wins
   } else {
-    console.log(
-      `${computerSelection} beats ${playerSelection}, Computer Wins!`
-    );
-    return "You Lose!";
+    computerCounter++;
+    computerScore.textContent = computerCounter;
+    title.textContent = (`${computerSelection} beats ${playerSelection}, Computer Wins!`);
   }
 }
 
-function game() {
-  // Looping game 5 times
-  for (i = 0; i < 5; i++) {
-    // Init selection for computer and player
-    computerSelection = computerPlay();
-    playerSelection = playerPlay();
+// function game() {
+//   // Looping game 5 times
+//   for (i = 0; i < 5; i++) {
+//     // Init selection for computer and player
+//     computerSelection = computerPlay();
+//     playerSelection = playerPlay();
 
-    // Runing game play function and logging results
-    console.log(playRound(playerSelection, computerSelection));
-  }
-}
+//     // Runing game play function and logging results
+//     console.log(playRound(playerSelection, computerSelection));
+//   }
+// }
 
-game();
+

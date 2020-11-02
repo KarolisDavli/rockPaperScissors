@@ -1,0 +1,85 @@
+/* Reset */
+
+html {
+  box-sizing: border-box;
+  font-size: 16px;
+}
+
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
+body, h1, h2, h3, h4, h5, h6, p, ol, ul, .counter {
+  margin: 0;
+  padding: 0;
+  font-weight: normal;
+  font-family: quasimoda-2, sans-serif;
+}
+
+ol, ul {
+  list-style: none;
+}
+
+
+/* Style */
+h1 {
+  font-size: 3.3rem;
+  margin: auto;
+  text-align: center;
+  margin-top: 4rem;
+  font-family: ;
+}
+
+.clicked {
+  transform: scale(0.9);
+}
+
+.results {
+  display: flex;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -80%);
+  align-items: center;
+}
+
+.score-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 2rem;
+}
+
+.counter {
+  margin: 1rem;
+  padding: 1rem;
+  font-size: 2rem;
+  width: 50px;
+
+}
+
+.game {
+  display: flex;
+	position: absolute;
+  top: 80%;
+  left: 50%;
+  transform: translate(-50%, -80%);
+}
+
+.player-selection {
+  border: 3px black solid;
+  border-radius: 12px;
+  font-family: rigid-square, sans-serif;
+  padding: 1rem;
+  margin: 1.2rem;
+  font-size: 2rem;
+  cursor: pointer;
+  transition: all 0.5;
+}
+
+.line {
+  width: 2px;
+  background-color: black;
+  height: 150px;
+}
